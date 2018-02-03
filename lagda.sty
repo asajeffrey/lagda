@@ -1,0 +1,18 @@
+\newcommand{\@slashIsEscape}{\catcode`\/=0}
+\newcommand{\@parensAreGrouping}{\catcode`\(=1\catcode`\)=2}
+\newcommand{\@inactiveMinus}{-}
+
+{%
+    \catcode`\-=\active
+    \gdef\@activeMinus{\@ifnextchar-{\@gobble}{\@inactiveMinus}}
+    \gdef\@minusIsActive{\catcode`\-=\active\let-\@activeMinus}
+}
+
+\newenvironment{code}{%
+  \@slashIsEscape
+  \@parensAreGrouping
+  \@minusIsActive
+  \ignorespaces
+}{%
+  \ignorespacesafterend
+}
